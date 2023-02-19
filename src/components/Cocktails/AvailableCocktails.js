@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect} from "react";
 import Card from "../UI/Card";
+import { useDispatch } from 'react-redux';
+import { getRandomCocktails } from '../../store/actions/cocktails'
+
 import classes from "./AvailableCocktails.module.css";
 
 const cocktails = [
@@ -21,7 +24,13 @@ const cocktails = [
     dateModified: "2017-01-02 20:18:16",
   },
 ];
+
 const Availablecocktails = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getRandomCocktails())
+  }, [])
+  
   const cocktailList = cocktails.map((item) => (
     <p>{item.strDrink}</p>
   ));
