@@ -1,16 +1,10 @@
 .cocktails {
     max-width: 80rem;
-    width: 90%;
+    width: 80%;
     margin: 2rem auto;
     animation: cocktails-appear 1s ease-out forwards;
   }
-  
-  .cocktails ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
+
   @keyframes cocktails-appear {
     from {
       opacity: 0;

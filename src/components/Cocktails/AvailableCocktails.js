@@ -1,30 +1,32 @@
 import React, { useEffect } from "react";
-import Card from "../UI/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { getRandomCocktails } from "../../store/actions/cocktails";
-
+import CocktailItem from "./CocktailItem/CocktailItem";
 import classes from "./AvailableCocktails.module.css";
+import Card from "../UI/Card";
+import { Grid } from "@material-ui/core";
 
-const Availablecocktails = () => {
-  
+const CardList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getRandomCocktails());
   }, []);
   const cocktails = useSelector((state) => state.cocktails);
 
-  let cocktailList = [];
-  if (cocktails) {
-    cocktailList = cocktails.map((item) => <p>{item.id}</p>);
-  }
-  
   return (
     <section className={classes.cocktails}>
       <Card>
-        <ul>{cocktailList}</ul>
+        <Grid container spacing={1}>
+          {cocktails &&
+            cocktails.map((item) => (
+              <Grid item xs={12} sm={6} md={4} key={item.id}>
+                <CocktailItem key={item.id} cocktail={item} />
+              </Grid>
+            ))}
+        </Grid>
       </Card>
     </section>
   );
 };
 
-export default Availablecocktails;
+export default CardList;
