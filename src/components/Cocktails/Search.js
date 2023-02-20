@@ -1,67 +1,87 @@
-// import React from 'react'
-
-// const Search = () => {
-//   return (
-//     <section className={classes.search}>
-//         <h2>Search</h2>
-//     </section>
-//   )
-// }
-
-// export default Search
-
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { InputBase, IconButton, Paper } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
 import classes from "./Search.module.css";
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     padding: "2px 4px",
-//     display: "flex",
-//     alignItems: "center",
-//     width: 400,
-//     margin: "0 auto",
-//   },
-//   input: {
-//     marginLeft: theme.spacing(1),
-//     flex: 1,
-//   },
-//   iconButton: {
-//     padding: 10,
-//   },
-// }));
+//   return (
+//     <section className={classes.search}>
+//       <Paper component="form" className={classes.root}>
+//         <InputBase
+//           className={classes.input}
+//           placeholder="Search"
+//           inputProps={{ "aria-label": "search" }}
+//           value={searchTerm}
+//           onChange={handleSearch}
+//         />
+//         <IconButton
+//           type="submit"
+//           className={classes.iconButton}
+//           aria-label="search"
+//         >
+//           <SearchIcon />
+//         </IconButton>
+//       </Paper>
+//     </section>
+//   );
+// }
 
-function SearchBar(props) {
-  // const classes = useStyles();
-  const [searchTerm, setSearchTerm] = useState("");
+const SearchBar = () => {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const API_BASE_URL = 'https://www.thecocktaildb.com';
+  const apiURL = `${API_BASE_URL}/api/json/v1/1/search.php?s=`;
+  
+  const inputRef = useRef()
+  const [cocktails, setCocktails] = useState([])
+  const timeout = useRef()
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-    props.handleSearch(event.target.value);
-  };
+  useEffect(() => {
+    
+  }, [])
+
+  const handleDebounceSearch = () => {
+    //Clear the previous timeout.
+    clearTimeout(timeout.current)
+
+    // If there is no search term, do not make API call
+    if (!inputRef.current.value.trim()) {
+      setCocktails([])
+      return
+    }
+    timeout.current = setTimeout(() => {
+      fetch(`${apiURL}${inputRef.current.value}`)
+        .then(async response => {
+          if (!response.ok) {
+            console.log("error fetching data!")
+          } else {
+            const data = await response.json()
+            setCocktails(data)
+          }
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }, 800)
+  }
 
   return (
-    <section className={classes.search}>
-      <Paper component="form" className={classes.root}>
-        <InputBase
-          className={classes.input}
-          placeholder="Search"
-          inputProps={{ "aria-label": "search" }}
-          value={searchTerm}
-          onChange={handleSearch}
-        />
-        <IconButton
-          type="submit"
-          className={classes.iconButton}
-          aria-label="search"
-        >
-          <SearchIcon />
-        </IconButton>
-      </Paper>
-    </section>
+    <div>
+      <input
+        type="text"
+        ref={inputRef}
+        onChange={handleDebounceSearch}
+        className="search-input"
+      />
+      {/* Display the result if search term is not empty and results are present */}
+      {inputRef.current?.value && cocktails.length > 0 && (
+        <ul>
+          {cocktails.map(animal => {
+            return <li key={animal.id}>{animal.name}</li>
+          })}
+        </ul>
+      )}
+    </div>
   );
 }
-
 export default SearchBar;
