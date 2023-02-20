@@ -1,1 +1,2 @@
-export const FETCH_ALL = 'FETCH_ALL'
+export const FETCH_FIVE = 'FETCH_FIVE'
+export const ADD_FAVOUTITES = 'ADD_FAVOUTITES'

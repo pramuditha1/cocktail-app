@@ -1,12 +1,11 @@
 import * as api from "../../api";
-import { FETCH_ALL } from "../../constants/actionType";
+import { FETCH_FIVE, ADD_FAVOUTITES } from "../../constants/actionType";
 
 export const getRandomCocktails = () => async (dispatch) => {
   try {
     const data = await fetchRandomCocktails();
-
-    console.log("===================== data ========= : ", data);
-    dispatch({ type: FETCH_ALL, payload: [...data] });
+    // console.log("===================== data ========= : ", data);
+    dispatch({ type: FETCH_FIVE, payload: [...data] });
   } catch (error) {
     console.log(error.message);
   }
@@ -33,3 +32,11 @@ const fetchRandomCocktails = async () => {
   );
   return data;
 };
+
+export const addToFavourites = (cocktail) => async (dispatch) => {
+  try {
+    dispatch({ type: ADD_FAVOUTITES, payload: [cocktail] })
+  } catch (error) {
+    console.log("action error add favourites : ", error.message)
+  }
+}

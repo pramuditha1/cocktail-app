@@ -31,7 +31,7 @@ export default function CocktailItem(props) {
         {/* <IconButton onClick={handleExpandClick} aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton> */}
-        <CocktailItemInputForm id={props.cocktail.id} addToCart={()=>{}}/>
+        <CocktailItemInputForm id={props.cocktail.id} cocktail={props.cocktail}/>
       </CardActions>
     </Card>
   );
