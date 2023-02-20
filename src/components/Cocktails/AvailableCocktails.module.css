@@ -5,6 +5,23 @@
     animation: cocktails-appear 1s ease-out forwards;
   }
 
+  .button {
+    cursor: pointer !important;
+    border-radius: 15px !important;
+    font-weight: bold !important;
+    padding: 8px !important;
+    background-color: #4d1601 !important;
+    color: #ffffff !important;
+  }
+  
+  .button:hover {
+    background-color: #e8b899 !important;
+  }
+
+  .buttonHeader {
+    margin: 12px;
+  }
+
   @keyframes cocktails-appear {
     from {
       opacity: 0;

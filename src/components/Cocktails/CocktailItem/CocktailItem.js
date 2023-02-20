@@ -1,27 +1,3 @@
-// import React, { useContext } from 'react'
-// import classes from './CocktailItem.module.css'
-// import CocktailItemInputForm from './CocktailItemInputForm'
-
-// const  CocktailItem = (props) => {
-
-//   const addToCartHandler = (amount) => {
-//   }
-//   return (
-//     <li className={classes.cocktail}>
-//         <div>
-//             <img className={classes.image} src={props.cocktail.image} alt={props.cocktail.image} />
-//             <h3 className={classes.name}>{props.cocktail.name}</h3>
-//             <div className={classes.category}>{props.cocktail.category}</div>
-//         </div>
-//         <div>
-//             <CocktailItemInputForm id={props.cocktail.id} addToCart={addToCartHandler}/>
-//         </div>
-//     </li>
-//   )
-// }
-
-// export default CocktailItem
-
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -48,7 +24,7 @@ export default function CocktailItem(props) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          aaaaa
+          description
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
