@@ -1,6 +1,6 @@
 import { FETCH_FIVE, SET_SEARCH_RESULTS, CLEAR_COCKTAILS } from '../../constants/actionType'
 
-export default (cocktails = [], action) => {
+const cocktailsReducer = (cocktails = [], action) => {
     switch (action.type) {
         case FETCH_FIVE:
             return [
@@ -15,3 +15,5 @@ export default (cocktails = [], action) => {
             return cocktails;
     }
 }
+
+export default cocktailsReducer;
