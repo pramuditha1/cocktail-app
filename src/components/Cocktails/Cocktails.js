@@ -1,14 +1,14 @@
-import React from 'react'
-import AvailableCocktails from './AvailableCocktails'
-import SearchCocktails from './Search'
+import React from "react";
+import AvailableCocktails from "./AvailableCocktails";
+import SearchCocktails from "./Search";
 
 const Cocktails = () => {
   return (
     <>
-        <SearchCocktails/>
-        <AvailableCocktails/>
+      <SearchCocktails />
+      <AvailableCocktails />
     </>
-  )
-}
+  );
+};
 
-export default Cocktails
+export default Cocktails;

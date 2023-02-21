@@ -3,24 +3,26 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import classes from "./Item.module.css";
 import { useDispatch } from "react-redux";
-import { addOneToFavouriteItem, removeOneFromFavouriteItem } from "../../../store/actions/cocktails";
+import {
+  addOneToFavouriteItem,
+  removeOneFromFavouriteItem,
+} from "../../../store/actions/cocktails";
 
 function Item(props) {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-    const handleOneItemRemove = (e) => {
-        e.preventDefault();
-        console.log(props.item.id)
-        dispatch(removeOneFromFavouriteItem(props.item.id))
-    }
+  const handleOneItemRemove = (e) => {
+    e.preventDefault();
+    console.log(props.item.id);
+    dispatch(removeOneFromFavouriteItem(props.item.id));
+  };
 
-    const handleOneItemAdd = (e) => {
-        e.preventDefault();
-        dispatch(addOneToFavouriteItem(props.item.id))
-    }
+  const handleOneItemAdd = (e) => {
+    e.preventDefault();
+    dispatch(addOneToFavouriteItem(props.item.id));
+  };
 
   return (
-    // <div className={classes.mainContainer}>
     <li className={classes["item"]}>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
@@ -45,7 +47,6 @@ function Item(props) {
         </div>
       </Box>
     </li>
-    // </div>
   );
 }
 

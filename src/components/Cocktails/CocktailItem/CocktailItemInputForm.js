@@ -10,7 +10,6 @@ const CocktailItemInputForm = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log()
     let favouriteItem = {
       amount: amountInputRef.current.value,
       ...props.cocktail

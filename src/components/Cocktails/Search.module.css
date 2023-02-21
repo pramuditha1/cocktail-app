@@ -25,7 +25,6 @@
     margin: 0 auto;
   }
   .input {
-    /* margin-left: theme.spacing(1); */
     flex: 1;
   }
   .iconButton {

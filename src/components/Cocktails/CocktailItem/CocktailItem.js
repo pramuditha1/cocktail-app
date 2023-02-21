@@ -4,10 +4,8 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import CocktailItemInputForm from './CocktailItemInputForm'
+import CocktailItemInputForm from "./CocktailItemInputForm";
 
 export default function CocktailItem(props) {
   return (
@@ -28,10 +26,10 @@ export default function CocktailItem(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        {/* <IconButton onClick={handleExpandClick} aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton> */}
-        <CocktailItemInputForm id={props.cocktail.id} cocktail={props.cocktail}/>
+        <CocktailItemInputForm
+          id={props.cocktail.id}
+          cocktail={props.cocktail}
+        />
       </CardActions>
     </Card>
   );

@@ -2,16 +2,18 @@ import * as api from "../../api";
 import {
   FETCH_FIVE,
   ADD_FAVOUTITES,
-  SET_SEARCH_RESULTS,
-  CLEAR_COCKTAILS,
+  SEARCH_REQUEST,
+  SEARCH_SUCCESS,
+  SEARCH_FAILURE,
   REMOVE_ONE_FROM_EXISTING_FAVOUTITES,
-  ADD_ONE_TO_EXISTING_FAVOUTITES
+  ADD_ONE_TO_EXISTING_FAVOUTITES,
 } from "../../constants/actionType";
+import { apiUrlSearch } from "../../constants/urls";
+import axios from "axios";
 
 export const getRandomCocktails = () => async (dispatch) => {
   try {
     const data = await fetchRandomCocktails();
-    // console.log("===================== data ========= : ", data);
     dispatch({ type: FETCH_FIVE, payload: [...data] });
   } catch (error) {
     console.log(error.message);
@@ -33,7 +35,6 @@ const fetchRandomCocktails = async () => {
         image: res.data.drinks[0].strDrinkThumb,
         name: res.data.drinks[0].strDrink,
       };
-      //return res.data.drinks[0];
       return cocktail;
     })
   );
@@ -48,43 +49,54 @@ export const addToFavourites = (cocktail) => async (dispatch) => {
   }
 };
 
-export const setSearchResults = (cocktails) => async (dispatch) => {
-  let cocktails1 = Object.values(cocktails);
-  // console.log("======= is array : ", Array.isArray(cocktails1));
+export const search = (searchQuery) => async (dispatch) => {
   try {
-    const data = await Promise.all(
-      cocktails1 &&
-        cocktails1.map((res) => {
-          let cocktail = {
-            id: res.idDrink,
-            category: res.strCategory,
-            image: res.strDrinkThumb,
-            name: res.strDrink,
-          };
-          return cocktail;
-        })
-    );
-    dispatch({ type: SET_SEARCH_RESULTS, payload: [...data] });
+    // todo : dispatch({ type: SEARCH_REQUEST });
+    axios
+      .get(`${apiUrlSearch}${searchQuery}`)
+      .then((response) => {
+        let cocktails1 = [...response.data.drinks];
+
+        const data =
+          cocktails1 &&
+          cocktails1.map((res) => {
+            let cocktail = {
+              id: res.idDrink,
+              category: res.strCategory,
+              image: res.strDrinkThumb,
+              name: res.strDrink,
+            };
+            return cocktail;
+          });
+
+        dispatch({
+          type: SEARCH_SUCCESS,
+          payload: [...data],
+        });
+      })
+      .catch((error) => {
+        console.log("action error", error.message);
+        // todo :
+        // dispatch({
+        //   type: SEARCH_FAILURE,
+        //   payload: error.message,
+        // });
+      });
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const clearSearchResults = () => async (dispatch) => {
-  try {
-    dispatch({type: CLEAR_COCKTAILS})
-  } catch (error) {
-    
-  }
-}
-
 export const removeOneFromFavouriteItem = (cocktailId) => async (dispatch) => {
   try {
-    dispatch({ type: REMOVE_ONE_FROM_EXISTING_FAVOUTITES, payload: cocktailId });
+    dispatch({
+      type: REMOVE_ONE_FROM_EXISTING_FAVOUTITES,
+      payload: cocktailId,
+    });
   } catch (error) {
     console.log("action error add favourites : ", error.message);
   }
-}
+};
 
 export const addOneToFavouriteItem = (cocktailId) => async (dispatch) => {
   try {
@@ -92,4 +104,4 @@ export const addOneToFavouriteItem = (cocktailId) => async (dispatch) => {
   } catch (error) {
     console.log("action error add favourites : ", error.message);
   }
-}
+};
