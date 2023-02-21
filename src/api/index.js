@@ -1,7 +1,4 @@
 import axios from 'axios';
+import { apiUrlDashboard } from '../constants/urls';
 
-const API_BASE_URL = 'https://www.thecocktaildb.com';
-const apiURL = `${API_BASE_URL}/api/json/v1/1/random.php`;
-
-
-export const fetchRandomCocktails = () => axios.get(apiURL);
+export const fetchRandomCocktails = () => axios.get(apiUrlDashboard);

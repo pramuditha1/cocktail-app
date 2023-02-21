@@ -40,6 +40,12 @@ const CardList = () => {
                 <CocktailItem key={item.id} cocktail={item} />
               </Grid>
             ))}
+          {cocktails.length <= 0 && (
+            <Typography variant="body2" color="text.secondary">
+              No cocktails related to your search. Press Refresh button to get
+              random cocktails...
+            </Typography>
+          )}
         </Grid>
       </Card>
     </section>
