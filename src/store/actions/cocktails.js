@@ -34,6 +34,7 @@ const fetchRandomCocktails = async () => {
         category: res.data.drinks[0].strCategory,
         image: res.data.drinks[0].strDrinkThumb,
         name: res.data.drinks[0].strDrink,
+        instructions: res.data.drinks[0].strInstructions
       };
       return cocktail;
     })
@@ -65,6 +66,7 @@ export const search = (searchQuery) => async (dispatch) => {
               category: res.strCategory,
               image: res.strDrinkThumb,
               name: res.strDrink,
+              instructions: res.strInstructions
             };
             return cocktail;
           });

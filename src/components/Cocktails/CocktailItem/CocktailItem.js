@@ -22,7 +22,7 @@ export default function CocktailItem(props) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          description
+          {props.cocktail.instructions}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
