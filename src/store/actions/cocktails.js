@@ -3,7 +3,9 @@ import {
   FETCH_FIVE,
   ADD_FAVOUTITES,
   SET_SEARCH_RESULTS,
-  CLEAR_COCKTAILS
+  CLEAR_COCKTAILS,
+  REMOVE_ONE_FROM_EXISTING_FAVOUTITES,
+  ADD_ONE_TO_EXISTING_FAVOUTITES
 } from "../../constants/actionType";
 
 export const getRandomCocktails = () => async (dispatch) => {
@@ -73,5 +75,21 @@ export const clearSearchResults = () => async (dispatch) => {
     dispatch({type: CLEAR_COCKTAILS})
   } catch (error) {
     
+  }
+}
+
+export const removeOneFromFavouriteItem = (cocktailId) => async (dispatch) => {
+  try {
+    dispatch({ type: REMOVE_ONE_FROM_EXISTING_FAVOUTITES, payload: cocktailId });
+  } catch (error) {
+    console.log("action error add favourites : ", error.message);
+  }
+}
+
+export const addOneToFavouriteItem = (cocktailId) => async (dispatch) => {
+  try {
+    dispatch({ type: ADD_ONE_TO_EXISTING_FAVOUTITES, payload: cocktailId });
+  } catch (error) {
+    console.log("action error add favourites : ", error.message);
   }
 }

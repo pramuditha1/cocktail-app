@@ -2,8 +2,23 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import classes from "./Item.module.css";
+import { useDispatch } from "react-redux";
+import { addOneToFavouriteItem, removeOneFromFavouriteItem } from "../../../store/actions/cocktails";
 
-function Item1(props) {
+function Item(props) {
+    const dispatch = useDispatch()
+
+    const handleOneItemRemove = (e) => {
+        e.preventDefault();
+        console.log(props.item.id)
+        dispatch(removeOneFromFavouriteItem(props.item.id))
+    }
+
+    const handleOneItemAdd = (e) => {
+        e.preventDefault();
+        dispatch(addOneToFavouriteItem(props.item.id))
+    }
+
   return (
     // <div className={classes.mainContainer}>
     <li className={classes["item"]}>
@@ -25,8 +40,8 @@ function Item1(props) {
       </Box>
       <Box>
         <div className={classes.actions}>
-          <button onClick={props.onRemove}>-</button>
-          <button onClick={props.onAdd}>+</button>
+          <button onClick={handleOneItemRemove}>-</button>
+          <button onClick={handleOneItemAdd}>+</button>
         </div>
       </Box>
     </li>
@@ -34,4 +49,4 @@ function Item1(props) {
   );
 }
 
-export default Item1;
+export default Item;

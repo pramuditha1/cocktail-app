@@ -1,10 +1,11 @@
 import React from "react";
 import Modal from "../UI/Modal";
-import { Box } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import classes from "./Favourites.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Item from "./FavouriteItem/Item";
 import { makeStyles } from "@material-ui/core/styles";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const useStyles = makeStyles((theme) => ({
   modalContent: {
@@ -21,9 +22,13 @@ const Favourites = (props) => {
   return (
     <Modal onClose={props.onClose}>
       <Box className={modalClasses.modalContent}>
-        <ul className={classes["cart-items"]}>
+        <Typography variant="h4" className={classes.header}>
+          <FavoriteIcon className={classes.icon} />
+          FAVOURITE ITEMS
+        </Typography>
+        <ul className={classes["favourite-items"]}>
           {favouriteCocktails.map((item) => (
-            <Item item={item} onRemove={() => {}} onAdd={() => {}} />
+            <Item item={item} />
           ))}
         </ul>
       </Box>
