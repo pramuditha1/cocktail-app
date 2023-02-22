@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { InputBase, IconButton, Paper } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
+import ClearIcon from '@mui/icons-material/Clear';
 import classes from "./Search.module.css";
-import { search } from "../../../store/actions/cocktails";
+import { search, getRandomCocktails } from "../../../store/actions/cocktails";
 import { useDispatch } from "react-redux";
 import { debounce } from "lodash";
 
@@ -19,12 +20,19 @@ const SearchBar = () => {
     query.length > 0 && debouncedSearch(query);
   }, [query, debouncedSearch]);
 
+  const handleClearSeartch = (e) => {
+    e.preventDefault();
+    //on clear search render random five cocktails
+    query.trim().length > 0 && dispatch(getRandomCocktails());
+    setQuery("");
+  }
+
   return (
     <section className={classes.search}>
       <Paper component="form" className={classes.root}>
         <InputBase
           className={classes.input}
-          placeholder="Search"
+          placeholder=" Search by cocktail name..."
           inputProps={{ "aria-label": "search" }}
           type="text"
           value={query}
@@ -36,9 +44,9 @@ const SearchBar = () => {
           type="submit"
           className={classes.iconButton}
           aria-label="search"
-          disabled={true}
+          onClick={handleClearSeartch}
         >
-          <SearchIcon />
+          <ClearIcon />
         </IconButton>
       </Paper>
     </section>
