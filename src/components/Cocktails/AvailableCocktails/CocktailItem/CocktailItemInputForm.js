@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux';
-import Input from '../../UI/Input'
-import { addToFavourites } from '../../../store/actions/cocktails';
+import Input from '../../../UI/Input'
+import { addToFavourites } from '../../../../store/actions/cocktails';
 import classes from './CocktailItemInputForm.module.css'
 
 const CocktailItemInputForm = (props) => {

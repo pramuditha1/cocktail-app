@@ -18,7 +18,7 @@ export default function CocktailItem(props) {
         component="img"
         height="194"
         image={props.cocktail.image}
-        alt="Paella dish"
+        alt={props.cocktail.name}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">

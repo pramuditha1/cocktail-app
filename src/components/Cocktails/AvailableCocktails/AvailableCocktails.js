@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRandomCocktails } from "../../store/actions/cocktails";
+import { getRandomCocktails } from "../../../store/actions/cocktails";
 import CocktailItem from "./CocktailItem/CocktailItem";
 import classes from "./AvailableCocktails.module.css";
-import Card from "../UI/Card";
+import Card from "../../UI/Card";
 import Button from "@mui/material/Button";
 import { Grid } from "@material-ui/core";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import Typography from "@mui/material/Typography";
 
-const CardList = () => {
+const AvailableCocktails = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getRandomCocktails());
@@ -52,4 +52,4 @@ const CardList = () => {
   );
 };
 
-export default CardList;
+export default AvailableCocktails;

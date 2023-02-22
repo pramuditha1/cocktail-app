@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { InputBase, IconButton, Paper } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
 import classes from "./Search.module.css";
-import { search } from "../../store/actions/cocktails";
+import { search } from "../../../store/actions/cocktails";
 import { useDispatch } from "react-redux";
 import { debounce } from "lodash";
 
@@ -36,6 +36,7 @@ const SearchBar = () => {
           type="submit"
           className={classes.iconButton}
           aria-label="search"
+          disabled={true}
         >
           <SearchIcon />
         </IconButton>
